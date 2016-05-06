@@ -187,8 +187,6 @@ angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$wi
             // properties that are used during animation. some of these overlap with
             // the ones that are used for presentation
             scope.$watchGroup(['current', 'max', 'radius', 'stroke', 'semi', 'offset'], function(newValue, oldValue){
-                console.log(newValue);
-                console.log(oldValue);
                 renderState(service.toNumber(newValue[0]), service.toNumber(oldValue[0]));
             });
         },
