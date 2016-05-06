@@ -6,21 +6,23 @@ angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$wi
         replace: true,
         transclude: true,
         scope: {
-            current:        '=',
-            max:            '=',
-            semi:           '=',
-            rounded:        '=',
-            clockwise:      '=',
-            responsive:     '=',
-            onRender:       '=',
-            radius:         '@',
-            color:          '@',
-            bgcolor:        '@',
-            stroke:         '@',
-            duration:       '@',
-            animation:      '@',
-            offset:         '@',
-            animationDelay: '@'
+            current:                    '=',
+            max:                        '=',
+            semi:                       '=',
+            rounded:                    '=',
+            clockwise:                  '=',
+            responsive:                 '=',
+            onRender:                   '=',
+            radius:                     '@',
+            color:                      '@',
+            bgcolor:                    '@',
+            stroke:                     '@',
+            strokebg:                   '@',
+            bgpos:                      '@',
+            duration:                   '@',
+            animation:                  '@',
+            offset:                     '@',
+            animationDelay:             '@'
         }
     };
 
@@ -47,12 +49,19 @@ angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$wi
             };
 
             var renderCircle = function(){
-                var isSemicircle     = options.semi;
-                var responsive       = options.responsive;
-                var radius           = +options.radius || 0;
-                var stroke           = +options.stroke;
-                var diameter         = radius*2;
+
+                var isSemicircle             = options.semi;
+                var responsive               = options.responsive;
+                var radius                   = +options.radius || 0;
+                var stroke                   = +options.stroke;
+                var strokebg                 = +options.strokebg;
+                var bgpos                    = options.bgpos;
+                var diameter                 = radius*2;
                 var backgroundSize   = radius - (stroke/2) - service.getOffset(element, options);
+                if( bgpos === 'outer' ) {
+                    backgroundSize   = radius - (strokebg/2) - service.getOffset(element, options);
+                }
+                
 
                 svg.css({
                     top:          0,
@@ -94,7 +103,7 @@ angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$wi
                     r:            backgroundSize >= 0 ? backgroundSize : 0
                 }).css({
                     stroke:       service.resolveColor(options.bgcolor),
-                    strokeWidth:  stroke
+                    strokeWidth:  strokebg
                 });
             };
 
@@ -178,6 +187,8 @@ angular.module('angular-svg-round-progressbar').directive('roundProgress', ['$wi
             // properties that are used during animation. some of these overlap with
             // the ones that are used for presentation
             scope.$watchGroup(['current', 'max', 'radius', 'stroke', 'semi', 'offset'], function(newValue, oldValue){
+                console.log(newValue);
+                console.log(oldValue);
                 renderState(service.toNumber(newValue[0]), service.toNumber(oldValue[0]));
             });
         },
