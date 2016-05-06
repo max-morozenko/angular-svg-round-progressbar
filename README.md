@@ -39,6 +39,8 @@ angular.module('someModule', ['angular-svg-round-progressbar'])
 | `color`        | The color of the `current` value on the circle.                                                           | No        | #45ccce           | Hex color or string. Refer to [this example](https://github.com/crisbeto/angular-svg-round-progressbar/issues/29) for an example of using a gradient.        |
 | `bgcolor`      | Color of the circle's background.                                                                         | No        | #eaeaea           | Hex color or string. Refer to [this example](https://github.com/crisbeto/angular-svg-round-progressbar/issues/29) for an example of using a gradient.         |
 | `stroke`       | Specifies the circle's thickness.                                                                         | No        | 15                | Integer           |
+| `strokebg`     | Specifies the background circle's thickness.                                                              | No        | 15                | Integer           |
+| `bgpos`        | Specifies the background circle's position.                                                               | No        | center            | string            |
 | `semi`         | Whether the progressbar should be a full circle or a semicircle.                                          | No        | false             | Boolean           |
 | `clockwise`    | Whether the progressbar should rotate clockwise or counter-clockwise.                                     | No        | true              | Boolean           |
 | `responsive`   | Whether the progressbar should fit inside its parent container. **Note** Turning this option on will override the specified radius in order to make the circle fit in its parent. The radius to stroke ratio won't change.                                     | No        | false              | Boolean           |
@@ -61,6 +63,8 @@ angular.module('someModule', ['angular-svg-round-progressbar'])
     bgcolor="#eaeaea"
     radius="100"
     stroke="20"
+    strokebg="20"
+    bgpos="center"
     semi="true"
     rounded="true"
     clockwise="false"
